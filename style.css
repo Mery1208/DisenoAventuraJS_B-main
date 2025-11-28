@@ -591,3 +591,17 @@ flex-wrap: wrap;
   z-index: 100;
   font-size: 1.3rem;
 }
+
+/* -----escena FINAL------- */
+#escena-final {
+  background-color: var(--secondary-color);
+}
+
+#escena-final .scene-header {
+  background-color: var(--secondary-color);
+  padding: 10px 21px;
+  text-align: center;
+  font-size: 1.8rem;
+  border-bottom: var(--borde-grosor) solid var(--color-texto-oscuro);
+}
+

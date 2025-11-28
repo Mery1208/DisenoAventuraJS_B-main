@@ -631,6 +631,12 @@ flex-wrap: wrap;
   margin-bottom: 40px;
 }
 
+#escena-final .scene-contenido p span {
+  font-weight: bold;
+  font-size: 1.8rem;
+  color: var(--color-boton);
+}
+
 #btn-reinicir {
   margin-top: 20px;
   padding: 18px 60px;

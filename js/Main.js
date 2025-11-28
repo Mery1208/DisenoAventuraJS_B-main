@@ -171,13 +171,13 @@ function irAMercado() {
       quitarDelInventarioVisual(producto.nombre);
     }
     
-
+// si selecciono o quito algo, siempre hago esto:
     if (typeof aplicarDescuentoAutomatico === 'function') aplicarDescuentoAutomatico(0.20);
     actualizarResumenOferta();
     pintarStatsInicio();
     pintarEstadoActualizado();
     
-
+//  vuelvo a renderizar productos para sincronizar estado de selección cuando haya búsqueda activa.
     const buscador = document.getElementById('buscar-producto');
     if (buscador && buscador.value.trim() !== '') {
       const term = buscador.value.trim().toLowerCase();
@@ -188,7 +188,7 @@ function irAMercado() {
   renderizarProductos(estado.productosDisponibles, onToggleCallback, seleccionarSet());
   actualizarResumenOferta();
 
-
+// busqueda filtrar por nombre en tiempo real
   const inputBuscar = document.getElementById('buscar-producto');
   const btnLimpiar = document.getElementById('btn-limpiar-busqueda');
   if (inputBuscar) {
@@ -215,11 +215,12 @@ function irAMercado() {
       return copia;
     });
   }
+  // Ejecuto el descuento al entrar para asegurar que los precios mostrados están bien.
   aplicarDescuentoAutomatico(0.20);
 }
 
 
-// Estado Actualizado 
+// -----------------ESCENA 3 --------------------------- 
 // Muestra mis datos después de haber comprado.
 
 function pintarEstadoActualizado() {
@@ -232,6 +233,7 @@ function pintarEstadoActualizado() {
 /* Resumen y descuento */
 function actualizarResumenOferta() {
 
+// Función para formatear el número con dos decimales y el símbolo de euro.
   const format = v => v.toFixed(2).replace('.', ',') + ' €';
   const lista = document.getElementById('resumen-oferta');
   const itemsContainerId = 'resumen-items-list';
@@ -246,7 +248,7 @@ function actualizarResumenOferta() {
     itemsContainer = div;
   }
 
-
+ //los calculos totales de todo
   const totalOriginal = estado.cesta.reduce((acc, p) => acc + ((p.precioOriginal !== undefined) ? p.precioOriginal : (p.precio || 0)), 0);
   const totalDescontado = estado.cesta.reduce((acc, p) => acc + (p.precio || 0), 0);
   const descuento = Math.round((totalOriginal - totalDescontado) * 100) / 100;
@@ -272,7 +274,7 @@ function actualizarResumenOferta() {
     });
   }
 
-
+  // actualizo el texto final de la caja de resumen
   const elTotal = document.getElementById('total-seleccion');
   const elDesc = document.getElementById('total-descuento');
   const elCon = document.getElementById('total-con-descuento');
@@ -282,6 +284,7 @@ function actualizarResumenOferta() {
 }
 
 function aplicarDescuentoGlobal(porcentaje) {
+  //esta funcion no la suo, pero la mantengo 
   estado.cesta = estado.cesta.map(p => {
     const copia = new Producto(p);
     copia.precioOriginal = (p.precioOriginal !== undefined) ? p.precioOriginal : (p.precio || 0);
@@ -291,11 +294,13 @@ function aplicarDescuentoGlobal(porcentaje) {
   actualizarResumenOferta();
 }
 
-// Enemigos 
+//-------------------- Escena 4 -Enemigos ---------------------------------
 // Preparé y muestré la lista de enemigos.
 function irAEnemigos() {
   showScene('escena-enemigos');
+  //creo la lista de objetos enemigo y jefe a partit de los datos que tengo.
   estado.enemigos = ENEMIGOS_BASE.map(e => e.jefe ? new Jefe(e) : new Enemigo(e));
+  //pongo las tarjetas de enemigo en el juego
   renderizarEnemigos(estado.enemigos);
 }
 
@@ -323,8 +328,10 @@ function renderizarEnemigos(lista) {
 
 function iniciarSiguienteCombate() {
   const enemigo = estado.enemigos[estado.indiceEnemigoActual];
+//usé la funcion combate para la pelea
   const { ganador, puntosGanados } = combate(enemigo, estado.jugador);
 
+  //muestro manera visual la pelea
   const resDiv = document.getElementById('resultado-combate');
   resDiv.innerHTML = `
     <div class="combate-visual">
@@ -341,41 +348,48 @@ function iniciarSiguienteCombate() {
     <p>Ganador: ${ganador} | Puntos ganados: ${puntosGanados}</p>
   `;
 
-  // REINICIO Esto es para que funcione en cada combate
+  // REINICIO con aanimaciónEsto es para que funcione en cada combate
   // Lo que hice aquí fue resetear la animación CSS para que se vuelva a ejecutar.
   // Sin esto, la animación solo se vería en el primer combate.
   setTimeout(() => {
+    //Busco las imágenes del jugador y del enemigo en el DOM.
     const combatPlayerImg = document.querySelector('.combatiente:first-child img');
     const combatEnemyImg = document.querySelector('.combatiente:last-child img');
     
     if (combatPlayerImg && combatEnemyImg) {
-
+      //Quité la animación css poniéndola en none.
       combatPlayerImg.style.animation = 'none';
       combatEnemyImg.style.animation = 'none';
       
+       //obligo al navegador a cargar.
+      // Usé .offsetHeight (busqué en internet) porque al pedir un valor visual, el navegador 
+      // recalcula todo y olvida que ya había una animación y no me funcionaba.
       combatPlayerImg.offsetHeight;
       combatEnemyImg.offsetHeight;
       
+      //Volví a activar la animación css dejando el valor vacío.
+      // Como el navegador cargó, ahora cree que es la primera vez 
+      // que se usa y la animación se repite.
       combatPlayerImg.style.animation = '';
       combatEnemyImg.style.animation = '';
     }
-  }, 10); 
+  }, 10); //espera 10 ms oara asegura que html funciona.
 
-
+  // Si gané, me sumo los puntos obtenidos.
   if (ganador === 'Jugador') {
     estado.jugador.sumarPuntos(puntosGanados);
   }
-
+// Aumento el contador para saber que ya he terminado con este enemigo.
   estado.indiceEnemigoActual++;
 
-
+  // Cambio el texto del botón a finalizar si ya es el último enemigo.
   const btn = document.getElementById('btn-siguiente-combate');
   btn.textContent = estado.indiceEnemigoActual >= estado.enemigos.length ? 'Finalizar' : 'Continuar';
 }
 
 
-// Finalizar Juego 
-// Calculo el resultado final y el rango.
+//---------------------------ESCENA 6 RESULTADO---------------------------------------
+// Calculo el resultado final y el rango Y AÑADO LO DE ANIMACIÓN CONFETTI
 function finalizarJuego() {
   console.log('Finalizando juego con puntos:', estado.jugador.puntos);
   showScene('escena-final');
@@ -408,6 +422,7 @@ function finalizarJuego() {
     }, 250);
   }
   
+  // Función local de emergencia para calcular el rango (la primera me falla).
   const distinguirJugadorLocal = (puntuacion, umbral = 500) => (puntuacion >= umbral ? 'Veterano' : 'Novato');
 
 
@@ -418,10 +433,10 @@ function finalizarJuego() {
       return { fn: distinguirJugadorLocal };
     });
 
-
+  //pongo limite 5 segundos para que no se quede cargando 
   const timeoutPromise = new Promise(resolve => setTimeout(() => resolve({ fn: distinguirJugadorLocal }), 5000));
 
-
+// espera la que se resuelva primero.
   Promise.race([importPromise, timeoutPromise])
     .then(result => {
       try {
@@ -437,7 +452,7 @@ function finalizarJuego() {
 }
 
 
-// Inventario Visual (Barra de abajo)
+// Inventario Visual (la barra de abajo)
 // Objetivo: Gestiona los iconos de los productos comprados.
 // Añade un nuevo producto al primer hueco libre de la barra.
 //  además de añadir el producto, le pongo una animación
@@ -453,7 +468,7 @@ function actualizarInventarioVisual(producto) {
   cargarInventario(estado.inventarioVisual);
   
 
-  //animación
+  //animación de pulso. cuando llega a 600ms se quita
   setTimeout(() => {
     const slots = document.querySelectorAll('.inventario-item');
     if (slots[idx]) {

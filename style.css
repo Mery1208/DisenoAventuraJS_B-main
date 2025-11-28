@@ -419,6 +419,11 @@ button:active, .btn-primary:active {
   text-transform: uppercase;
 }
 
+/* Dejo scroll solo en la escena Mercado */
+#escena-mercado .scene-contenido {
+  overflow-y: auto;
+  padding-bottom: 140px; 
+}
 
 /* --------Enemigos-------- tarjetas --------- */
 
@@ -643,3 +648,5 @@ flex-wrap: wrap;
   font-size: 1.3rem;
   text-transform:uppercase;
 }
+
+

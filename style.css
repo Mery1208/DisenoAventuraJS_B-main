@@ -529,10 +529,7 @@ button:active, .btn-primary:active {
 display: flex;
 flex-direction: column;
 align-items: center;
-gap: 30px;
-margin-top: 20px;
-margin-bottom: 30px;
-flex-wrap: wrap;
+width: 200px;
 }
 
 .combatiente img {
@@ -681,11 +678,47 @@ flex-wrap: wrap;
   color: var(--color-boton);
 }
 
-#btn-reinicir {
+#btn-reiniciar {
   margin-top: 20px;
   padding: 18px 60px;
   font-size: 1.3rem;
   text-transform:uppercase;
 }
 
+@media (max-width: 768px) {
+  #jugador-stats-grid, #estado-stats-grid { 
+    grid-template-columns: 1fr; 
+  }
+  
+  #inicio-top-area, #estado-top-area { 
+    justify-content: center; 
+    align-items: center; 
+    height: auto; 
+  }
+  
+  #cazador-titulo, #estado-titulo { 
+    align-self: center; 
+    position: static; 
+    margin-right: 0; 
+    margin-bottom: 15px; 
+  }
+  
+  .jugador-avatar-large { 
+    margin-left: 0; 
+    margin-right: 0; 
+  }
 
+  .grid-productos { 
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); 
+  }
+  
+  .grid-enemigos { 
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+  }
+  
+  .combate-visual {
+    flex-direction: column;
+    gap: 30px;
+    overflow: visible;
+  }
+}

@@ -311,6 +311,25 @@ button:active, .btn-primary:active {
   font-family: var(--fuente-medieval);
   transition: transform 0.2s ease, background-color 0.2s ease;
 }
+.product-card .btn-toggle:hover { 
+  background-color: var(--color-boton-hover);
+  transform: scale(1.05); 
+}
+
+/* ------ animacion cuando añado el producto--------- */
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translateY(-20px);
+  }
+  50% {
+    transform: scale(1.1); 
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
 
 /* mi idea ha sido añadir mensaje cuando compro un producto */
 .cart-notificacion {

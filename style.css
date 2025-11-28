@@ -1,15 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+
+/* Variables - GUIA DE ESTILO */
 :root{
-  --primary-color:  #c9a86a;
-  --secondary-color:  #5a4532;
-  --accent-color: #d8c392; 
-  --highlight-color:  #5a4532;
+  /* Colores principales */
+  --color-beige: #c9a86a;
+  --color-marron-oscuro: #5a4532;
+  --color-stats-caja: #d8c392;
+  --color-texto-oscuro: #2c1810;
+  --color-boton: #f4d03f;
+  --color-boton-hover: #f5d957;
+  --color-gris-oscuro: #3d2c1f;
+  
+  /* Espaciados */
+  --espacio-pequeno: 8px;
+  --espacio-medio: 16px;
+  --espacio-grande: 24px;
+  
+  /* Bordes */
+  --borde-grosor: 3px;
+  --borde-radio: 6px;
+  
+  /* Fuente medieval */
+  --fuente-medieval: 'MedievalSharp', cursive;
+  --fuente-normal: Arial, sans-serif;
 }
+
 
 body{
   background-color: var(--primary-color);

@@ -3,11 +3,11 @@
 // Aquí hice la base creando al cazador (jugador principal)
 //-------------------------------------------------------------
 
-import { MAX_INVENTARIO, TIPOS } from "../modulos/constants";
+import { MAX_INVENTARIO, TIPOS } from "../modulos/constants.js";
 
 export class Jugador {
     //añado constructor con sus datos 
-     constructor({nombre, avatar, vida= 100, puntos = 100 }) {
+     constructor({nombre, avatar, vida= 100, puntos = 0 }) {
         this.nombre = nombre;
         this.avatar = avatar;
         this.vidaBase = vida;

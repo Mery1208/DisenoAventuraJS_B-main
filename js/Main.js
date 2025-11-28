@@ -121,7 +121,7 @@ function wireEvents() {
 function mostrarNotificacionCarrito(nombreProducto) {
   // Creé el elemento HTML de la notificación.
   const notificacion = document.createElement('div');
-  notificacion.className = 'cart-notification';
+  notificacion.className = 'cart-notificacion';
   notificacion.textContent = ` ${nombreProducto} añadido`;
   
   // Lo añadí al body para que se vea en pantalla bonico.

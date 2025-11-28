@@ -99,6 +99,26 @@ footer{
   object-fit: contain;
 }
 
+.inventario-item, .inventario-slot-vacio {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: var(--primary-color);
+  border: var(--borde-grosor) solid var(--color-texto-oscuro);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+  position: relative;
+}
+
+/*  pa cuando paso el ratón por encima, el producto se agranda */
+.inventario-item:hover {
+  transform: scale(1.2); 
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5); 
+  z-index: 10; 
+  cursor: pointer;
+}
+
 /* ---------------------------- MAIN Y ESCENAS ---------------------------- */
 
 main{

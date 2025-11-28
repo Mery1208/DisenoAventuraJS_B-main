@@ -315,7 +315,7 @@ function renderizarEnemigos(lista) {
       <h4>${e.nombre}</h4>
       <p><strong>Ataque:</strong> ${e.ataque}</p>
       <p><strong>Vida:</strong> ${e.vida}</p>
-      ${'multiplicadorDaño' in e ? `<p><strong>Jefe x${e.multiplicadorDaño}</strong></p>` : ''}
+      ${'multiplicadorPupa' in e ? `<p><strong>Jefe x${e.multiplicadorPupa}</strong></p>` : ''}
     `;
     cont.appendChild(card);
   });
@@ -468,7 +468,7 @@ function actualizarInventarioVisual(producto) {
   cargarInventario(estado.inventarioVisual);
   
 
-  //animación de pulso. cuando llega a 600ms se quita
+  //animación de pulso. cuando llega a 600ms se apaga
   setTimeout(() => {
     const slots = document.querySelectorAll('.inventario-item');
     if (slots[idx]) {

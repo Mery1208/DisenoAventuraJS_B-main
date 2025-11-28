@@ -18,7 +18,7 @@ export function showScene(id) {
 //inicializarInventariovacio
 // La usé al principio para dibujar los 6 huecos vacíos en la barra de abajo.
 //------------------------------------------
-export function inicializarInventariovacio(n = MAX_INVENTARIO) {
+export function inicializarInventarioVacio(n = MAX_INVENTARIO) {
     const contenedor = document.getElementById('inventory-container');
     contenedor.innerHTML = '';
     for (let i = 0; i < n; i++) {
@@ -49,6 +49,6 @@ export function cargarInventario(items) {
             imagen.alt = item.nombre;
             hueco.appendChild(imagen);
         }
-        contenedor.appenChild(hueco);
+        contenedor.appendChild(hueco);
     });
 }

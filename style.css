@@ -48,7 +48,7 @@ body{
 
 /* ---------------------------- HEADER ---------------------------- */
 
-scene-header{
+.scene-header{
   display: flex;
   justify-content: center;
   color: white;
@@ -93,12 +93,6 @@ footer{
   border-radius: var(--borde-radio);
 }
 
-.inventario-item img {
-  width: 70%;
-  height: 70%;
-  object-fit: contain;
-}
-
 .inventario-item, .inventario-slot-vacio {
   width: 100%;
   aspect-ratio: 1 / 1;
@@ -135,6 +129,17 @@ footer{
     box-shadow: 0 0 0 rgba(244, 208, 63, 0);
   }
 }
+
+/* Clase que aplicaré con JavaScript cuando se añada un item */
+.inventario-item.just-added {
+  animation: pulseInventory 0.6s ease-out;
+}
+
+.inventario-item img {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+}
 /* ---------------------------- MAIN Y ESCENAS ---------------------------- */
 
 main{
@@ -159,8 +164,6 @@ main{
   display: flex !important;
   flex-direction: column;
 }
-
-
 /* ---------------------------- Escena 1 y 3 ---------------------------- */
 #inicio-top-area, #estado-top-area {
   background-color: var(--secondary-color);

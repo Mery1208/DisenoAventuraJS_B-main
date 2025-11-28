@@ -54,7 +54,7 @@ export function buscarPorNombre(productos, nombre) {
 
 export function renderizarProductos(productos, alHacerToggle, seleccionados = new Set()) {
     const contenedor = document.getElementById('lista-productos');
-    contenedor.innerHTML.HTML = '';
+    contenedor.innerHTML = '';
 
     productos.forEach(producto => {
         const tarjeta = document.createElement('div');
@@ -69,7 +69,7 @@ export function renderizarProductos(productos, alHacerToggle, seleccionados = ne
                 <button class="btn-toggle">Añadir</button>
             `;
 
-        const boton = tarjeta.querySelector('btn-toggle');
+        const boton = tarjeta.querySelector('.btn-toggle');
 
         // Compruebo si el producto ya está seleccionado. Si es así, le cambio el estilo y el texto a 'Retirar'.
         if (seleccionados.has(producto.nombre)) {

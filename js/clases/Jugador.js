@@ -3,7 +3,7 @@
 // Aquí hice la base creando al cazador (jugador principal)
 //-------------------------------------------------------------
 
-import { MAX_INVENTARIO } from "../modulos/constants";
+import { MAX_INVENTARIO, TIPOS } from "../modulos/constants";
 
 export class Jugador {
     //añado constructor con sus datos 

@@ -4,7 +4,7 @@
 //-------------------------------------------------------------
 
 export class Enemigo {
-    constructo({nombre, imagen, ataque, vida }) {
+    constructor({nombre, imagen, ataque, vida }) {
         this.nombre = nombre;
         this.imagen = imagen;
         this.ataque = ataque;

@@ -19,6 +19,7 @@
   --color-boton: #f4d03f;
   --color-boton-hover: #f5d957;
   --color-gris-oscuro: #3d2c1f;
+  --color-carta-seleccionada: #b8a066; 
   
   /* Espaciados */
   --espacio-pequeno: 8px;
@@ -287,6 +288,11 @@ button:active, .btn-primary:active {
    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
+.product-card:hover {
+  transform: translateY(-8px); 
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5); 
+  background: #f0e0b8; 
+}
 .product-card.selected { 
   background: #b8a066; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -441,6 +447,11 @@ button:active, .btn-primary:active {
   transform: translateY(-10px);
   box-shadow:  0 16px 32px rgba(0, 0, 0, 0.6);
   background: #f0e0b8;
+}
+
+.product-card.selected { 
+  background: var(--color-carta-seleccionada); 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .enemy-card img {

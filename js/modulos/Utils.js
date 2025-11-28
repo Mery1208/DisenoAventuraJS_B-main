@@ -1,51 +1,54 @@
-//-----------------------------------------------------------
-//CLASE CONSTANTS 
-// Hice este archivo para guardar valores que no cambian (variables globales)
-//-------------------------------------------------------------
+import { MAX_INVENTARIO } from './constants.js';
+//----------------------------------------------
+//showScene (por Elías)
+//Hice esta función para poder cambiar de pantalla fácilmente.
+//Recibo el 'id' de la pantalla que quiero mostrar.
+//------------------------------------------
 
-// La lista de rarezas que uso para los productos.
-export const RAREZAS = ['Comun', 'Rara', 'Epica'];
-
-export const TIPOS = {
-    ARMA: 'Arma',
-    ARMADURA: 'Amadura',
-    CONSUMIBLE: 'Consumible'
+export function showScene(id) {
+    // Busco todas las pantallas y las escondo quitándoles la clase 'active'.
+    document.querySelectorAll('.scene').forEach(escena => escena.classList.remove('active'));
+    // Busco la pantalla que tiene el 'id' que me pasaron.
+    const escenaObjetivo = document.getElementById(id);
+    // Si existe, la muestro añadiéndole la clase 'active'.
+    if (escenaObjetivo) escenaObjetivo.classList.add('active');
 }
 
-// Puntuación mínima que necesito para que el juego me considere Veterano.
-export const UMBRAL_RANGO_DEFAULT =500;
+//----------------------------------------------
+//inicializarInventariovacio
+// La usé al principio para dibujar los 6 huecos vacíos en la barra de abajo.
+//------------------------------------------
+export function inicializarInventariovacio(n = MAX_INVENTARIO) {
+    const contenedor = document.getElementById('inventory-container');
+    contenedor.innerHTML = '';
+    for (let i = 0; i < n; i++) {
+        const hueco = document.createElement('div');
+        hueco.className = 'inventario-slot-vacio';
+        contenedor.appendChild(hueco);
+    }
+}
 
-// El número máximo de objetos que puedo llevar en el inventario.
-export const MAX_INVENTARIO = 6;
+//----------------------------------------------
+//cargarInventario
+//Uso esta función para dibujar los productos o huecos vacíos en la barra de inventario.
+//Recibe 'items', una lista que tiene productos y 'null' si el hueco está vacío.
+//------------------------------------------
+export function cargarInventario(items) {
+    const contenedor = document.getElementById('inventory-container');
+    contenedor.innerHTML = ''; // Limpio para dibujar de nuevo.
 
-export const PRODUCTOS_BASE = [
-    // ARMADURAS: Me dan bonus de Defensa (el valor de bonus).
-  { nombre: 'Casco', imagen: './img/productos/armadura/casco.png', precio: 90, rareza: 'Comun', tipo: 'Armadura', bonus: 10 },
-  { nombre: 'Mochila', imagen: './img/productos/armadura/mochila.png', precio: 70, rareza: 'Rara', tipo: 'Armadura', bonus: 5 },
-  { nombre: 'Botas', imagen: './img/productos/armadura/botas.png', precio: 50, rareza: 'Comun', tipo: 'Armadura', bonus: 12 },
-  { nombre: 'Pantalón', imagen: './img/productos/armadura/pantalon.png', precio: 80, rareza: 'Comun', tipo: 'Armadura', bonus: 15 },
-  { nombre: 'Pechera', imagen: './img/productos/armadura/pechera.png', precio: 160, rareza: 'Epica', tipo: 'Armadura', bonus: 20 },
-  { nombre: 'Escudo', imagen: './img/productos/armadura/escudo.png', precio: 110, rareza: 'Rara', tipo: 'Armadura', bonus: 10 },
+    items.forEach(item => {
+        const hueco = document.createElement('div');
+        // Si 'item' tiene datos, es un producto. Si es 'null', es un hueco vacío.
+        hueco.className = item ? 'inventario-item' : 'inventario-slot-vacio';
 
-  // ARMAS: Me dan bonus de Ataque (el valor de bonus).
-  { nombre: 'Hacha', imagen: './img/productos/armas/hacha.png', precio: 100, rareza: 'Rara', tipo: 'Arma', bonus: 7 },
-  { nombre: 'Espada', imagen: './img/productos/armas/espada.png', precio: 110, rareza: 'Comun', tipo: 'Arma', bonus: 6 },
-  { nombre: 'Arco', imagen: './img/productos/armas/arco.png', precio: 95, rareza: 'Comun', tipo: 'Arma', bonus: 5 },
-  { nombre: 'Lanza', imagen: './img/productos/armas/lanza.png', precio: 120, rareza: 'Rara', tipo: 'Arma', bonus: 8 },
-
-  // CONSUMIBLES: Me dan bonus de Vida extra (el valor de bonus).
-  { nombre: 'Manzana curativa', imagen: './img/productos/consumibles/manzana.png', precio: 40, rareza: 'Comun', tipo: 'Consumible', bonus: 10 },
-  { nombre: 'Poción', imagen: './img/productos/consumibles/pocion.png', precio: 60, rareza: 'Rara', tipo: 'Consumible', bonus: 12 },
-  { nombre: 'Botiquín', imagen: './img/productos/consumibles/botiquin.png', precio: 85, rareza: 'Rara', tipo: 'Consumible', bonus: 20 },
-  { nombre: 'Hierbas', imagen: './img/productos/consumibles/hierbas.png', precio: 30, rareza: 'Comun', tipo: 'Consumible', bonus: 6 },
-  { nombre: 'Pan', imagen: './img/productos/consumibles/pan.png', precio: 15, rareza: 'Comun', tipo: 'Consumible', bonus: 4 }
-];
-
-export const ENEMIGOS_BASE = [
-     // Enemigos normales (solo tienen ataque y vida).
-  { nombre: 'Pandilleros', imagen: './img/enemigos/pandilleros.png', ataque: 10, vida: 40 },
-  { nombre: 'Lobo', imagen: './img/enemigos/lobo.png', ataque: 25, vida: 50 },
-  { nombre: 'Ogro', imagen: './img/enemigos/ogro.png', ataque: 31, vida: 60 },
-  // El último es el JEFE (tiene 'jefe: true' y un multiplicador de daño extra).
-  { nombre: 'Dragón', imagen: './img/enemigos/dragon.png', ataque: 34, vida: 100, jefe: true, multiplicadorPupa: 1.2 }
-];
+        if(item) {
+            // Si es un producto, creo su imagen y la meto en el hueco.
+            const imagen = document.createElement('img');
+            imagen.src = item.imagen;
+            imagen.alt = item.nombre;
+            hueco.appendChild(imagen);
+        }
+        contenedor.appenChild(hueco);
+    });
+}

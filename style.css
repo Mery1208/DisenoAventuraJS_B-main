@@ -128,8 +128,8 @@ main{
 /* ---------------------------- Escena 1 y 3 ---------------------------- */
 #inicio-top-area, #estado-top-area {
   background-color: var(--secondary-color);
-  width: 80%;
-  height: 170%;
+  width: 100%;
+  height: 220%;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -140,7 +140,7 @@ main{
 
 #cazador-titulo, #estado-titulo {
   color: var(--color-texto-oscuro);
-  font-size: 1.5rem;
+  font-size: 2rem;
   position: absolute;
   top: 20px;
   right: 20px;
@@ -149,8 +149,8 @@ main{
 }
 
 .jugador-avatar-large {
-  width: 180px;
-  height: 180px;
+  width: 200px;
+  height: 200px;
   border-radius: 5px;
   overflow: hidden;
   margin-right: 40px;

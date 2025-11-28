@@ -212,8 +212,28 @@ button, .btn-primary {
   font-family: var(--fuente-medieval);
 }
 
+ /* boton se eleva al pasar el ratón */
 button:hover, .btn-primary:hover {
   background-color: var(--color-boton-hover);
   transform: translateY(-2px);
   box-shadow:0 6px 12px rgba(0, 0, 0, 0.3);
+}
+button:active, .btn-primary:active {
+  transform: translateY(0);
+}
+
+#btn-iniciar-aventura {
+  margin-top: 20px;
+  align-self: center;
+}
+
+/* ----------encabezado de los cojone---------  */
+.scene-header {
+  background-color: var(--secondary-color);
+  padding: 20px 25px;
+  text-align: right;
+  color: var(--color-texto-oscuro);
+  font-family: 2.2rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }

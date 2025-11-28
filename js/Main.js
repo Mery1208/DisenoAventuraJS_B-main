@@ -14,7 +14,7 @@ const estado = {
     jugador: null, // Aquí guardo todos los datos de mi personaje.
     productosDisponibles: [], // Lista de productos que muestro en el Mercado
     cesta: [],// Productos que seleccioné para comprar
-    ennemigos: [], // Lista de todos los enemigos a los que me voy a enfrentar
+    enemigos: [], // Lista de todos los enemigos a los que me voy a enfrentar
     indiceEnemigoActual: 0, // Uso esta variable para saber contra qué enemigo me toca pelear ahora , empieza en 0
     inventarioVisual: [null, null, null, null, null, null] //array de los items que hay en el inventario
 }
@@ -48,7 +48,7 @@ function pintarStatsInicio() {
   // Navegación y Eventos (wireEvents)
 //Aquí es donde defino qué pasa cuando pulso cada botón.
 
-function WireEvents() {
+function wireEvents() {
  document.getElementById('btn-iniciar-aventura').addEventListener('click', () => {
     irAMercado();
   });
@@ -278,7 +278,6 @@ function aplicarDescuentoGlobal(porcentaje) {
 
 // Enemigos 
 // Preparé y muestré la lista de enemigos.
-
 function irAEnemigos() {
   showScene('escena-enemigos');
   estado.enemigos = ENEMIGOS_BASE.map(e => e.jefe ? new Jefe(e) : new Enemigo(e));
@@ -368,6 +367,57 @@ function finalizarJuego() {
   
   document.getElementById('final-puntos').textContent = estado.jugador.puntos;
   
+  //confetti
+  if (typeof confetti === 'function') {
+    // Lancé confetti desde ambos lados de la pantalla
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
+    
+    // Esperé un poquito y lancé más confetti para que dure más tiempo
+    setTimeout(() => {
+      confetti({
+        particleCount: 50,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0 }
+      });
+      confetti({
+        particleCount: 50,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1 }
+      });
+    }, 250);
+  }
+  
+  const distinguirJugadorLocal = (puntuacion, umbral = 500) => (puntuacion >= umbral ? 'Veterano' : 'Novato');
+
+
+  const importPromise = import('./modulos/Ranking.js')
+    .then(mod => ({ fn: (typeof mod.distinguirJugador === 'function') ? mod.distinguirJugador : distinguirJugadorLocal }))
+    .catch(err => {
+      console.warn('Fallo al importar Ranking.js:', err);
+      return { fn: distinguirJugadorLocal };
+    });
+
+
+  const timeoutPromise = new Promise(resolve => setTimeout(() => resolve({ fn: distinguirJugadorLocal }), 5000));
+
+
+  Promise.race([importPromise, timeoutPromise])
+    .then(result => {
+      try {
+        const rango = result && typeof result.fn === 'function' ? result.fn(estado.jugador.puntos) : 'Novato';
+        document.getElementById('final-rango').textContent = `El Jugador ha subido al nivel ${rango}.`;
+        console.log('Rango asignado:', rango);
+      } catch (e) {
+        console.error('Error al calcular rango:', e);
+        document.getElementById('final-rango').textContent = `El Jugador ha logrado subir a Novato.`;
+      }
+    });
  
 }
 
@@ -387,6 +437,17 @@ function actualizarInventarioVisual(producto) {
   }
   cargarInventario(estado.inventarioVisual);
   
+
+  //animación
+  setTimeout(() => {
+    const slots = document.querySelectorAll('.inventario-item');
+    if (slots[idx]) {
+      slots[idx].classList.add('just-added');
+      setTimeout(() => {
+        slots[idx].classList.remove('just-added');
+      }, 600);
+    }
+  }, 50);
 
 }
 

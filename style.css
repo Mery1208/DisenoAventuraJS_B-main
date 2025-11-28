@@ -186,7 +186,7 @@ main{
 
 .stat-box {
   background-color: var(--color-stats-caja);
-  padding: 30px 14px;
+  padding: 30px 25px;
   border-radius: 0;
   color: var(--color-texto-oscuro);
   font-weight: normal;
@@ -201,7 +201,7 @@ main{
 }
 
 button, .btn-primary {
-  padding: 13px 25px;
+  padding: 15px 35px;
     background-color: var(--color-boton);
   border: none; 
   border-radius: 3px; 
@@ -210,6 +210,9 @@ button, .btn-primary {
   font-size: 1.1rem; 
   color: var(--color-texto-oscuro);
   font-family: var(--fuente-medieval);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  margin: 0;
+  box-shadow:  0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
  /* boton se eleva al pasar el ratón */
@@ -230,8 +233,9 @@ button:active, .btn-primary:active {
 /* ----------encabezado de los cojone---------  */
 .scene-header {
   background-color: var(--secondary-color);
-  padding: 20px 25px;
-  text-align: right;
+  padding: 20px 30px;
+  text-align: left;
+  flex-shrink: 0;
   color: var(--color-texto-oscuro);
   font-family: 2.2rem;
   font-weight: bold;

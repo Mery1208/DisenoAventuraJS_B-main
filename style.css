@@ -315,17 +315,17 @@ button:active, .btn-primary:active {
 /* mi idea ha sido añadir mensaje cuando compro un producto */
 .cart-notificacion {
   position: fixed;
-  top: 7px;
-  right: 7px;
+  top: 20px;
+  right: 20px;
   background: var(--color-boton);
   color: var(--color-texto-oscuro);
   padding: 15px 25px;
   border-radius: var(--borde-radio);
   font-weight: bold;
   font-family: var(--fuente-medieval);
-  z-index: 5000;
-  animation: popIn 0.2s ease-out;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  z-index: 9999;
+  animation: popIn 0.5s ease-out;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 /* cesta y ticket */

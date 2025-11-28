@@ -481,4 +481,83 @@ button:active, .btn-primary:active {
   flex-wrap: wrap;
 }
 
-.coma
+.combatiente {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 30px;
+margin-top: 20px;
+margin-bottom: 30px;
+flex-wrap: wrap;
+}
+
+.combatiente img {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  border: var(--borde-grosor) solid var(--color-texto-oscuro);
+  background-color: #fff1;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+
+/* ------------animaciones q el jugador y el enemigo salen de lados contrarios---------- */
+
+/* jugador sale de la derecha  */
+@keyframes slideInFromRight {
+  from {
+   
+    transform: translateX(100vw);
+    opacity: 0;
+  }
+  to {
+    
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* enemigo sale de la izquierda */
+@keyframes slideInFromLeft {
+  from {
+    
+    transform: translateX(-100vw);
+    opacity: 0;
+  }
+  to {
+   
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* hago que se aplique la animacion a jugador */
+.combatiente:first-child img {
+  animation: slideInFromRight 1.7s ease-out;
+}
+
+.combatiente:last-child img {
+  animation: slideInFromLeft 1.7s ease-out;
+}
+
+.versus {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--color-boton);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.resultado-combate {
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+}
+
+.resultado-combate p {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 60px;
+}

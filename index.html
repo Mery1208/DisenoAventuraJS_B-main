@@ -99,36 +99,32 @@
     <!-- Escena 4 Enemigos  -->
     <section id="escena-enemigos" class="scene">
       <div class="scene-header">Enemigos</div>
-
-      
-</div>
+      <div class="scene-contenido">
+        <div id="lista-enemigos" class="grid-enemigos"></div>
         <button id="btn-empezar-batallas" class="btn-primary">Continuar</button>
       </div>
   </section>
 
-
-
   <!-- Escena 5 Combates -->
-  <section id="scene-5" class="scene">
-
-
-   </div>
+  <section id="escena-batallas" class="scene">
+    <div class="scene-header">Combates</div>
+    <div class="scene-contenido">
+      <div id="resultado-combate" class="resultado-combate"></div>
         <button id="btn-siguiente-combate" class="btn-primary">Continuar</button>
       </div>
   </section>
 
   <!-- Ecena 6 Resulltado -->
-  <section id="scene-6" class="scene">
-
-
-    </div>
+  <section id="escena-final" class="scene">
+    <div class="scene-header">Resultado Final</div>
+     <div class="scene-contenido">
+      <h3 id="final-rango"></h3>
+      <p>Puntos totales: <span id="final-puntos">0</span></p>
         <button id="btn-reiniciar" class="btn-primary">Continuar</button>
       </div>
   </section>
 
-
-
-
+  <!-- Inventario - Footer -->
   <footer>
     <div id="inventory-container">
       <div class="inventario-slot-vacio"></div>
@@ -140,6 +136,11 @@
     </div>
   </footer>
 
+
+  <!-- Efecto Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    
   <script type="module" src="./js/main.js"></script>
 </body>
 

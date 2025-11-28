@@ -33,26 +33,33 @@ function init() {
 
 
 //-----------------ESCENA 1-------------------------------
+// Muestra los datos básicos de mi personaje.
 function pintarStatsInicio() {
   if (!estado.jugador) return; 
   const inventarioJugador = estado.jugador.inventario || [];
+  // Hice una suma de los bonus de ataque que me dan los objetos de tipo arma que tengo.
   const bonusArmas = inventarioJugador.filter(p => p.tipo === 'Arma').reduce((a, p) => a + (p.bonus || 0), 0);
+    // Hice lo mismo para la defensa, sumando los bonus de las defensas.
   const bonusArmadura = inventarioJugador.filter(p => p.tipo === 'Armadura').reduce((a, p) => a + (p.bonus || 0), 0);
+  // uso el getVidaTotal de la clase Jugador para obtener mi vida final.
   const vidaTotal = estado.jugador.getVidaTotal();
 
+  // y actualizo el texto en la pantalla en index con estos números.
+  document.getElementById('inicio-ataque').textContent = bonusArmas;
   document.getElementById('inicio-ataque').textContent = bonusArmas;
   document.getElementById('inicio-defensa').textContent = bonusArmadura;
   document.getElementById('inicio-vida').textContent = vidaTotal;
   document.getElementById('inicio-puntos').textContent = estado.jugador.puntos;
 }
-  // Navegación y Eventos (wireEvents)
+  // navego y los eventos
 //Aquí es donde defino qué pasa cuando pulso cada botón.
-
 function wireEvents() {
+  // Botón  continuar de la  escena 1, me lleva al mercado.
  document.getElementById('btn-iniciar-aventura').addEventListener('click', () => {
     irAMercado();
   });
 
+  //boton comprar
   const btnComprar = document.getElementById('btn-comprar');
   if (btnComprar) {
     btnComprar.addEventListener('click', () => {
@@ -62,42 +69,45 @@ function wireEvents() {
       console.log('Compra realizada y stats actualizados');
     });
   }
-
+  // Botón  continuar de la  escena 2, me lleva al 3.
   document.getElementById('btn-ir-estado').addEventListener('click', () => {
     showScene('escena-estado');
     pintarEstadoActualizado();
   });
 
+    // Botón  continuar de la  escena 3, me lleva al 4.
   document.getElementById('btn-ir-enemigos-2').addEventListener('click', () => {
     irAEnemigos();
   });
 
-
+  // Botón  continuar de la  escena 4, me lleva al 5.
   document.getElementById('btn-empezar-batallas').addEventListener('click', () => {
     estado.indiceEnemigoActual = 0; 
     showScene('escena-batallas');
     iniciarSiguienteCombate(); 
   });
 
+    // Botón Siguiente Combate escena 5.
   document.getElementById('btn-siguiente-combate').addEventListener('click', () => {
-    
+    // Si todavía me quedan enemigos en mi lista, sigo peleando.
     if (estado.indiceEnemigoActual < estado.enemigos.length) {
       iniciarSiguienteCombate();
     } else {
-     
+      // Si ya no quedan, limpio la pantalla de resultados y llamo a finalizarJuego.
       document.getElementById('resultado-combate').innerHTML = '';
       finalizarJuego(); 
     }
   });
 
+  //boton reiniciar q va de la escena 6 a la 1 de nuevo
   document.getElementById('btn-reiniciar').addEventListener('click', () => {
-    
+    //Reseteo mi jugador a su estado inicial.
     estado.jugador = new Jugador({ nombre: 'Cazador', avatar: './img/jugador/maria.png', vida: 100, puntos: 0 });
-   
+   //Vacié todas las listas y el inventario visual.
     estado.cesta = [];
     estado.inventarioVisual = [null, null, null, null, null, null];
     inicializarInventarioVacio(6);
-  
+  //Vuelvo a mostrar las estadísticas y la primera pantalla.
     pintarStatsInicio();
     showScene('escena-inicio');
   });
@@ -109,13 +119,15 @@ function wireEvents() {
 // y luego desaparece automáticamente.
 
 function mostrarNotificacionCarrito(nombreProducto) {
-  
+  // Creé el elemento HTML de la notificación.
   const notificacion = document.createElement('div');
   notificacion.className = 'cart-notification';
   notificacion.textContent = ` ${nombreProducto} añadido`;
   
+  // Lo añadí al body para que se vea en pantalla bonico.
   document.body.appendChild(notificacion);
   
+  //Después de 2 segundos, lo quito del DOM, 
   setTimeout(() => {
     notificacion.remove();
   }, 2000);
@@ -127,21 +139,23 @@ function mostrarNotificacionCarrito(nombreProducto) {
 function irAMercado() {
   showScene('escena-mercado');
 
+// Generé una lista de productos para la tienda, con un descuento especial al azar.
   estado.productosDisponibles = obtenerProductosConDescuentoAleatorio();
   const seleccionarSet = () => new Set(estado.cesta.map(p => p.nombre));
 
-  
+  // funcion que se ejecuta cada vez que hago añadir o retirar.
   const onToggleCallback = (producto, seleccionado) => {
     if (seleccionado) {
-
+      // Intenté añadir el producto a mi inventario real.
       const añadido = estado.jugador.añadirObjeto(producto);
       if (!añadido) {
- 
+      // Si esta lleno, le aviso al jugador.
         alert(`No puedes tener más de ${MAX_INVENTARIO} productos en el inventario.`);
         const seleccionarSet = () => new Set(estado.cesta.map(p => p.nombre));
         renderizarProductos(estado.productosDisponibles, onToggleCallback, seleccionarSet());
         return;
       }
+      // Lo añado a la lista de seleccionados y al inventario visual.
       estado.cesta.push(new Producto(producto));
       actualizarInventarioVisual(new Producto(producto));
       
@@ -151,6 +165,7 @@ function irAMercado() {
 
       mostrarNotificacionCarrito(producto.nombre);
     } else {
+       // Si pulso retirar, lo quito de la cesta y de mi inventario.
       estado.cesta = estado.cesta.filter(p => p.nombre !== producto.nombre);
       estado.jugador.retirarObjeto(producto.nombre);
       quitarDelInventarioVisual(producto.nombre);

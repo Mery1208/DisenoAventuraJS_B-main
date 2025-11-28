@@ -342,9 +342,52 @@ button:active, .btn-primary:active {
 .grid-cesta {
   width: 100%;
   display:grid;
+  gap: 12px;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   min-height: 100px;
-  padding: 10px;
+  padding: 15px;
   background-color: rgba(0,0,0,0.2);
   border-radius: 5px;
+}
+
+.mercado-footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 0 10px 0;
+  margin-top: auto;
+}
+
+.btn-comprar {
+  padding: 15px 60px;
+  background-color: var(--color-boton);
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: var(--color-texto-oscuro);
+  font-family: var(--fuente-medieval);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  text-transform: uppercase;
+  margin: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn-comprar:hover {
+  background-color: var(--color-boton-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.btn-comprar:active { 
+  transform: translateY(0); 
+}
+
+.mercado-footer .btn-primary {
+  padding: 15px 60px;
+  font-size: 1.2rem;
+  text-transform: uppercase;
 }

@@ -8,7 +8,7 @@ export const RAREZAS = ['Comun', 'Rara', 'Epica'];
 
 export const TIPOS = {
     ARMA: 'Arma',
-    ARMADURA: 'Amadura',
+    ARMADURA: 'Armadura',
     CONSUMIBLE: 'Consumible'
 }
 

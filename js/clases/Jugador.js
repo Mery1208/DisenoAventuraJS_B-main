@@ -7,7 +7,7 @@ import { MAX_INVENTARIO, TIPOS } from "../modulos/constants";
 
 export class Jugador {
     //añado constructor con sus datos 
-     constructo({nombre, avatar, vida= 100, puntos = 100 }) {
+     constructor({nombre, avatar, vida= 100, puntos = 100 }) {
         this.nombre = nombre;
         this.avatar = avatar;
         this.vidaBase = vida;

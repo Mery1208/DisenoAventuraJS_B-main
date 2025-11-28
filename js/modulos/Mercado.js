@@ -98,7 +98,7 @@ export function renderizarProductos(productos, alHacerToggle, seleccionados = ne
 
 export function renderizarCesta(productosCesta) {
     const contenedor = document.getElementById('cesta-productos');
-    contenedor.innerHTML.HTML = '';
+    contenedor.innerHTML = '';
 
     productosCesta.forEach(producto => {
         const tarjeta = document.createElement('div');

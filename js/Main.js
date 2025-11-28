@@ -1,5 +1,5 @@
-import { showScene, inicializarInventarioVacio, cargarInventario } from './modulos/Utils.js';
 import { Jugador } from './clases/Jugador.js';
+import { showScene, inicializarInventarioVacio, cargarInventario } from './modulos/Utils.js';
 import { Enemigo } from './clases/Enemigo.js';
 import { Jefe } from './clases/Jefe.js';
 import { Producto } from './clases/Producto.js';
@@ -426,10 +426,10 @@ function finalizarJuego() {
   const distinguirJugadorLocal = (puntuacion, umbral = 500) => (puntuacion >= umbral ? 'Veterano' : 'Novato');
 
 
-  const importPromise = import('./modulos/Ranking.js')
+  const importPromise = import('./modulos/ranking.js')
     .then(mod => ({ fn: (typeof mod.distinguirJugador === 'function') ? mod.distinguirJugador : distinguirJugadorLocal }))
     .catch(err => {
-      console.warn('Fallo al importar Ranking.js:', err);
+      console.warn('Fallo al importar ranking.js:', err);
       return { fn: distinguirJugadorLocal };
     });
 

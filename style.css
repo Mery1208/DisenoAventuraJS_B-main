@@ -1,3 +1,5 @@
+/*  importé una fuente de Google Fonts que le da un toque medieval . */
+
 @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
 
 *{
@@ -10,8 +12,8 @@
 /* Variables - GUIA DE ESTILO */
 :root{
   /* Colores principales */
-  --color-beige: #c9a86a;
-  --color-marron-oscuro: #5a4532;
+  --secondary-color: #c9a86a;
+  --primary-color: #5a4532;
   --color-stats-caja: #d8c392;
   --color-texto-oscuro: #2c1810;
   --color-boton: #f4d03f;
@@ -37,8 +39,10 @@ body{
   background-color: var(--primary-color);
   height: 100vh;
   display: grid;
-  grid-template-rows: auto 1fr auto;
-  padding: 32px;
+  grid-template-rows:  1fr auto;
+  overflow: hidden;
+  font-family: var(--fuente-medieval);
+  color: #fff;
 }
 
 /* ---------------------------- HEADER ---------------------------- */
@@ -50,85 +54,68 @@ scene-header{
   padding: 16px;
 }
 
+
+/* ---------------------------- CONTENEDOR JUEGO Y ESTRUCTURA PRINCIPAL ---------------------------- */
+
+#contenedor-juego{
+  display:flex;
+  flex-direction: column;
+  width:100%;
+  overflow: hidden;
+}
+
 /* ---------------------------- FOOTER ---------------------------- */
 
 footer{
+  position: relative;
+  width: 100%;
   display: flex;
   justify-content: center;
-  padding: 16px;
+  align-items: center;
+  padding: 6px 0;
+  z-index: 1000;
+  border-top: var(--borde-grosor) solid var(--color-texto-oscuro);
 }
 
 #inventory-container{
   background: var(--secondary-color);
-  display: flex;
-  gap: 4px;
-  padding: 8px;
-}
-
-.item{
-  background: var(--highlight-color);
-  width: 100px;
-  height: 100px;
-  padding: 8px;
-  border: 4px solid var(--accent-color);
-}
-
-.item img{
-  width: 100%;
-  filter: drop-shadow(2px 4px 3px black);
-}
-
-.item img:hover{
-  transform: scale(1.25);
-}
-
-/* ---------------------------- ESCENAS ---------------------------- */
-
-#scene-1{
-  height: 100%;
-  background-color: var(--secondary-color);
   display: grid;
-  grid-template-rows: 40% 50% 10%;
+  grid-template-columns: repeat(6 , 1fr);
+  gap: 19px;
+  padding: 12px;
+  max-width: 500px;
+  width: 40%;
+  min-height: 30px;
+  align-items: center;
+  justify-items: center;
+  border: var(--borde-grosor) solid var(--color-texto-oscuro);
+  border-radius: var(--borde-radio);
 }
 
-  #scene-1>div:first-child{
-    /* height: 40%; */
-    display: flex;
-    justify-content: space-between;
-    padding: 16px;
-    color: white;
-  }
+/* ----------------------------  ---------------------------- */
 
-    #scene-1>div:first-child>img{
-      filter: drop-shadow(5px 0px 1px black);
-    }
+/* ---------------------------- MAIN Y ESCENAS ---------------------------- */
 
-  #scene-1>div:nth-child(2){
-    /* height: 50%; */
-  }
+main{
+  flex-grow: 1;
+  overflow-y: hidden;
+  position: relative;
+}
 
-  #scene-1>div:nth-child(3){
-    /* height: 10%; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+/* las escenas ocultas por defecto */
+.scene {
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%;
+  display: none !important; 
+  z-index: 10;
+  overflow: hidden;
+}
 
-  #scene-1 h2{
-    font-size: 2.5rem;
-  }
+.scene.active {
+  display: flex !important;
+  flex-direction: column;
+}
 
-  #scene-1-stats>div{
-    height: 64px;
-    margin: 8px;
-    border: 4px solid var(--accent-color);
-    padding: 8px;
-    background: var(--highlight-color);
-    box-shadow: 1px 1px black;
-    display: flex;
-    align-items: center;
-  }
-
-  #scene-1-stats>div p{
-    font-size: 2rem;
-  }

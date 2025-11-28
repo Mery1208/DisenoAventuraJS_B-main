@@ -1,184 +1,146 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <title>Aventura en el Reino de JS</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <header>
     <h1 id="title">Aventura en el Reino de Mery</h1>
   </header>
+  <div id="contenedor-juego">
 
-  <main>
-    <section id="scene-1" class="scene">
-      <div class="perfil-top">
-        <div class="avatar-large">
-        <img src="./img/jugador/maria.png"  alt="Cazador">
+    <!-- Escena 1: Inicio -->
+    <section id="escena-inicio" class="scene active">
+      <div id="inicio-top-area">
+        <div class="jugador-avatar-large">
+          <img src="./img/jugador/maria.png" alt="Cazador">
         </div>
-        <h2 class="perfil-titulo">Cazador</h2>
+        <h1 id="cazzador-titulo">Cazador</h1>
       </div>
-      <div class="scene-contenido">
-        <div class="stats-grid">
+
+      <div id="inicio-boton-area">
+        <div id="jugador-stats-grid">
           <div class="stat-box">
-            <p>Ataque</p>
-            <span>0</span>
+            <p>Ataque: <span id="inicio-ataque">0</span></p>
           </div>
-           <div class="stat-box">
-            <p>Defensa</p>
-            <span>0</span>
+          <div class="stat-box">
+            <p>Defensa: <span id="inicio-defensa">0</span></p>
           </div>
-           <div class="stat-box">
-            <p>Vida</p>
-            <span>100</span>
+          <div class="stat-box">
+            <p>Vida: <span id="inicio-vida">0</span></p>
           </div>
-           <div class="stat-box">
-            <p>Puntos</p>
-            <span>0</span>
+          <div class="stat-box">
+            <p>Puntos: <span id="inicio-puntos">0</span></p>
           </div>
         </div>
-
-        <label for="nav-2" class="btn">Continuar</label>
+        <button id="btn-iniciar-aventura" class="btn-primary">Continuar</button>
       </div>
     </section>
-
 
     <!-- Escena 2 Mercado -->
-    <section id="scene-2" class="scene">
-      <div class="scene-header">Mercado</div>
+    <section id="escena-mercado" class="scene">
+      <div class="scene-header">
+        <h2 class="mercado-titulo">Mercado Negro</h2>
+      </div>
       <div class="scene-contenido">
-        <div class="grid">
+        <div id="lista-productos" class="grid-productos">
 
-          <input type="checkbox" id="producto-1" class="producto-checkbox">
-          <label for="producto-1" class="tarjeta">
-            <img src="" alt="Espada">
-            <h3>Espada</h3>
-            <p><strong>Bonus:</strong> +6 Ataque</p>
-            <p><strong>Precio:</strong> 100€</p>
-            <p><strong>Rareza:</strong> Común</p>
-            <span class="btn btn-toogle"></span>
-          </label>
+          <div id="oferta-juego" style="width:80%; max-width: 1000px;">
+            <p style="color:#fff; margin-bottom:8px; font-weight:bold;">Oferta: 20% descuento en todos los productos seleccionados</p>
 
-          <input type="checkbox" id="producto-1" class="producto-checkbox">
-          <label for="producto-1" class="tarjeta">
-            <img src="" alt="Espada">
-            <h3>Hacha</h3>
-            <p><strong>Bonus:</strong> +10 Ataque</p>
-            <p><strong>Precio:</strong> 100€</p>
-            <p><strong>Rareza:</strong> Común</p>
-            <span class="btn btn-toogle"></span>
-          </label>
+            <!-- Descuento aplicado cuando se elige los productos-->
+            <div id="resumen-oferta" style="color:#fff; background: rgba(0,0,0,0.15); padding:10px; border-radius:6px;">
+              <p>Total Seleccionado: <span id="total-seleccion">0 €</span></p>
+              <p>Descuento Aplicado: <span id="total-descuento">0 €</span></p>
+              <p>Total con Descuento: <span id="total-con-descuento">0 €</span></p>
+            </div>
+          </div>
 
-          <input type="checkbox" id="producto-1" class="producto-checkbox">
-          <label for="producto-1" class="tarjeta">
-            <img src="" alt="Espada">
-            <h3>Arco</h3>
-            <p><strong>Bonus:</strong> +8 Ataque</p>
-            <p><strong>Precio:</strong> 100€</p>
-            <p><strong>Rareza:</strong> Común</p>
-            <span class="btn btn-toogle"></span>
-          </label>
-
-          <input type="checkbox" id="producto-1" class="producto-checkbox">
-          <label for="producto-1" class="tarjeta">
-            <img src="" alt="Espada">
-            <h3>Lanza</h3>
-            <p><strong>Bonus:</strong> +7 Ataque</p>
-            <p><strong>Precio:</strong> 100€</p>
-            <p><strong>Rareza:</strong> Común</p>
-            <span class="btn btn-toogle"></span>
-          </label>
+          <div class="mercado-footer">
+            <button id="btn-ir-estado" class="btn-primary">Continuar</button>
+          </div>
         </div>
-      </div>
-      </div>
-        <label for="nav-3" class="btn">Continuar</label>
       </div>
     </section>
+
     <!-- Escena 3 Perfil Actualizado -->
-    <section id="scene-3" class="scene">
-      <div class="perfil-top">
-        <div class="avatar-large">
-          <img src="./img/characters/1.png"  alt="Cazador">
-          </div>
-        <h2 class="perfil-titulo">Cazador</h2>
+    <section id="escena-estado" class="scene">
+      <div class="estado-top-area">
+        <div class="jugador-avatar-large">
+          <div class="jugador-avatar-large">
+          <img src="./img/jugador/maria.png" alt="Cazador">
+        </div>
+        <h1 id="cazzador-titulo">Cazador</h1>
       </div>
-      <div class="scene-contenido">
-        <div class="stats-grid">
+
+      <div id="inicio-boton-area">
+        <div id="estado-stats-grid">
           <div class="stat-box">
-            <p>Ataque</p>
-            <span>0</span>
+            <p>Ataque: <span id="estado-ataque">0</span></p>
           </div>
-           <div class="stat-box">
-            <p>Defensa</p>
-            <span>0</span>
+          <div class="stat-box">
+            <p>Defensa: <span id="estado-defensa">0</span></p>
           </div>
-           <div class="stat-box">
-            <p>Vida</p>
-            <span>100</span>
+          <div class="stat-box">
+            <p>Vida: <span id="estado-vida">0</span></p>
           </div>
-           <div class="stat-box">
-            <p>Puntos</p>
-            <span>0</span>
+          <div class="stat-box">
+            <p>Puntos: <span id="estado-puntos">0</span></p>
           </div>
         </div>
-        <label for="nav-4" class="btn">Continuar</label>
+        <button id="btn-ir-enemigos-2" class="btn-primary">Continuar</button>
       </div>
     </section>
 
     <!-- Escena 4 Enemigos  -->
-    <section id="scene-4" class="scene">
-      <div class="">
+    <section id="escena-enemigos" class="scene">
+      <div class="scene-header">Enemigos</div>
 
+      
+</div>
+        <button id="btn-empezar-batallas" class="btn-primary">Continuar</button>
       </div>
-       </div>
-        <label for="nav-5" class="btn">Continuar</label>
+  </section>
+
+
+
+  <!-- Escena 5 Combates -->
+  <section id="scene-5" class="scene">
+
+
+   </div>
+        <button id="btn-siguiente-combate" class="btn-primary">Continuar</button>
       </div>
-    </section>
+  </section>
+
+  <!-- Ecena 6 Resulltado -->
+  <section id="scene-6" class="scene">
 
 
-
-    <!-- Escena 5 Combates -->
-     <section id="scene-5" class="scene">
-
-
-       </div>
-        <label for="nav-6" class="btn">Continuar</label>
+    </div>
+        <button id="btn-reiniciar" class="btn-primary">Continuar</button>
       </div>
-     </section>
-
-   <!-- Ecena 6 Resulltado -->
-     <section id="scene-6" class="scene">
-
-
-       </div>
-        <label for="nav-1" class="btn">Continuar</label>
-      </div>
-     </section>
+  </section>
 
 
 
 
   <footer>
     <div id="inventory-container">
-      <div class="item">
-        <img src="./img/objects/bag.png" alt="">
-      </div>
-      <div class="item">
-        <img src="./img/objects/armor.png" alt="">
-      </div>
-      <div class="item">
-        <img src="./img/objects/apple.png" alt="">
-      </div>
-      <div class="item">
-        <img src="./img/objects/hp.png" alt="">
-      </div>
-      <div class="item">
-        <img src="./img/objects/axe.png" alt="">
-      </div>
-      <div class="item">
-        <img src="./img/objects/gem.png" alt="">
-      </div>
+      <div class="inventario-slot-vacio"></div>
+      <div class="inventario-slot-vacio"></div>
+      <div class="inventario-slot-vacio"></div>
+      <div class="inventario-slot-vacio"></div>
+      <div class="inventario-slot-vacio"></div>
+      <div class="inventario-slot-vacio"></div>
     </div>
   </footer>
+
+  <script type="module" src="./js/main.js"></script>
 </body>
+
 </html>
